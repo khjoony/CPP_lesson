@@ -150,6 +150,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="for_star_diamond ver 1.0.cpp" />
+    <ClCompile Include="for_star_diamond ver 1.1.cpp" />
     <ClCompile Include="repeat_while_RockPaperScissorsGame.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
