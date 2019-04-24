@@ -13,6 +13,15 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Lib">
+      <UniqueIdentifier>{135d148c-f9c9-478e-a1eb-4299c6be13df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\iterator">
+      <UniqueIdentifier>{558dd42e-adcc-440c-bf24-4a10e83f89c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\array">
+      <UniqueIdentifier>{ff7a6429-b734-4f78-adcb-07d9f30d7c6c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dataType.cpp">
@@ -27,17 +36,28 @@
     <ClCompile Include="condition_if_switch.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="repeat_while_RockPaperScissorsGame.cpp">
-      <Filter>소스 파일</Filter>
+    <ClCompile Include="MyLib.cpp">
+      <Filter>Lib</Filter>
     </ClCompile>
-    <ClCompile Include="array_for_lottoGame.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="for_star_diamond ver 1.0.cpp">
-      <Filter>소스 파일</Filter>
+    <ClCompile Include="everyNote.cpp">
+      <Filter>Lib</Filter>
     </ClCompile>
     <ClCompile Include="for_star_diamond ver 1.1.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>소스 파일\iterator</Filter>
     </ClCompile>
+    <ClCompile Include="for_star_diamond ver 1.0.cpp">
+      <Filter>소스 파일\iterator</Filter>
+    </ClCompile>
+    <ClCompile Include="repeat_while_RockPaperScissorsGame.cpp">
+      <Filter>소스 파일\iterator</Filter>
+    </ClCompile>
+    <ClCompile Include="array_for_lottoGame.cpp">
+      <Filter>소스 파일\array</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="MyLib.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

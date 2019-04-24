@@ -3,40 +3,31 @@
 #include <time.h>
 #include <iomanip>
 
+#include "MyLib.h"
+
 using namespace std;
 
 #define LOTTO 45
+#define LOTNUM 6
+void CreateNum (int* pArr, int size);
+void Shuffle   (int* pArr, int size);
+void PrintNum  (int* pArr, int sizeLine, int sizeTot);
 int main()
 {
 	srand((unsigned int)time(0));
-	
+
 	int iLotto[LOTTO] = {};
-	
-	for (int i = 0; i < LOTTO; ++i)
-	{
-		iLotto[i] = i + 1;
-	}
+	int *pLotto = iLotto;
+
+	// Create number
+	CreateNum(pLotto, LOTTO);
 
 	// Shuffle
-	int iTemp, iIndex1, iIndex2;
 	int iRandomline;
-	for (int i = 0; i < LOTTO * 4; ++i)
-	{
-		iIndex1 = rand() % LOTTO;
-		iIndex2 = rand() % LOTTO;
+	Shuffle(pLotto, LOTTO);
 
-		// Swap
-		iTemp = iLotto[iIndex1];
-		iLotto[iIndex1] = iLotto[iIndex2];
-		iLotto[iIndex2] = iTemp;
-	}
-
-	for (int i = 0; i < LOTTO; ++i)
-	{
-		cout << setw(5) << iLotto[i];
-		if (i % 6 == 5)
-			cout << endl;
-	}
+	// Print
+	PrintNum(pLotto, LOTNUM, LOTTO);
 	iRandomline = rand() % 7 + 1;
 	cout << "\n This week's winning number is ";
 	for (int i = 0; i < 6; ++i)
