@@ -5,7 +5,7 @@
 #include "MyLib.h"
 
 using namespace std;
-
+static int iStarIndex;
 void CreateNum(int* pArr, int size)
 {
 
@@ -31,12 +31,19 @@ void Shuffle(int* pArr, int size)
 	}
 }
 
-void PrintNum(int* pArr, int sizeLine, int sizeTot)
+void PrintNum(int* pArr, int iCol, int sizeTot)
 {
 	for (int i = 0; i < sizeTot; ++i)
 	{
+		if (pArr[i] == INT_MAX)
+		{
+			cout << setw(5) << "*";
+			iStarIndex = i;
+		}
+
+		else
 		cout << setw(5) << pArr[i];
-		if (i % 6 == sizeLine -1)
+		if (i % iCol == iCol -1)
 			cout << endl;
 	}
 }
@@ -46,7 +53,6 @@ void PrintNum(int* pArr, int size)
 	cout << "AI's  number is ";
 	for (int i = 0; i < size; ++i)
 	{
-		//cout << setw(5) << pArr[i];
 		cout << setw(5) << "*";
 	}
 	cout << endl;
@@ -81,5 +87,61 @@ void Compare(int* pArr1, int* pArr2,int* pStr, int size)
 				++pStr[1];
 			}
 		}
+	}
+}
+
+void MoveUp(int* pArr, int iCol, int sizeTot)
+{
+	if (iStarIndex > iCol)
+	{
+		pArr[iStarIndex] = pArr[iStarIndex - iCol];
+		pArr[iStarIndex - iCol] = INT_MAX;
+	}
+	else
+	{
+		pArr[iStarIndex] = pArr[iStarIndex + sizeTot - iCol];
+		pArr[iStarIndex + sizeTot - iCol] = INT_MAX;
+	}
+}
+
+void MoveDown(int* pArr, int iCol, int sizeTot)
+{
+	if (iStarIndex < sizeTot - iCol)
+	{
+		pArr[iStarIndex] = pArr[iStarIndex + iCol];
+		pArr[iStarIndex + iCol] = INT_MAX;
+	}
+	else
+	{
+		pArr[iStarIndex] = pArr[iStarIndex - sizeTot + iCol];
+		pArr[iStarIndex - sizeTot + iCol] = INT_MAX;
+	}
+}
+
+void MoveLeft(int* pArr, int iCol, int sizeTot)
+{
+	if (iStarIndex % iCol != 0 )
+	{
+		pArr[iStarIndex] = pArr[iStarIndex - iCol/iCol];
+		pArr[iStarIndex - iCol/iCol] = INT_MAX;
+	}
+	else
+	{
+		pArr[iStarIndex] = pArr[iStarIndex + iCol-1];
+		pArr[iStarIndex +iCol -1] = INT_MAX;
+	}
+}
+
+void MoveRight(int* pArr, int iCol, int sizeTot)
+{
+	if (iStarIndex % iCol != 4)
+	{
+		pArr[iStarIndex] = pArr[iStarIndex + iCol/iCol];
+		pArr[iStarIndex + iCol/iCol] = INT_MAX;
+	}
+	else
+	{
+		pArr[iStarIndex] = pArr[iStarIndex - iCol +1];
+		pArr[iStarIndex - iCol +1] = INT_MAX;
 	}
 }
