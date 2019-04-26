@@ -44,7 +44,7 @@ void PrintNum(int* pArr, int iCol, int sizeTot)
 		else
 		cout << setw(5) << pArr[i];
 		if (i % iCol == iCol -1)
-			cout << endl;
+			cout << endl << endl;
 	}
 }
 
@@ -58,11 +58,13 @@ void PrintNum(int* pArr, int size)
 	cout << endl;
 }
 
-void UserInput(int* pArr, int size)
+int UserInput(int* pArr, int size, int& iEnd)
 {
 	for (int i = 0; i < size; ++i)
 	{
 		cin >> pArr[i];
+		if (pArr[i] == 0)
+			return iEnd = 0;
 	}
 	cout << " Your number is ";
 	for (int i = 0; i < size; ++i)
@@ -85,6 +87,20 @@ void Compare(int* pArr1, int* pArr2,int* pStr, int size)
 			else if (i != j && pArr1[i] == pArr2[j])
 			{
 				++pStr[1];
+			}
+		}
+	}
+}
+
+void Compare(int* pArr1, int* pArr2, int iCol, int sizeTot)
+{
+	for (int i = 0; i < sizeTot; ++i)
+	{
+		for (int j = 0; j < iCol; ++j)
+		{
+			if (pArr1[i] == pArr2[j])
+			{
+				pArr1[i] = INT_MAX;
 			}
 		}
 	}
@@ -144,4 +160,45 @@ void MoveRight(int* pArr, int iCol, int sizeTot)
 		pArr[iStarIndex] = pArr[iStarIndex - iCol +1];
 		pArr[iStarIndex - iCol +1] = INT_MAX;
 	}
+}
+
+void Count(int* pArr, int iCol, int sizeTot,int& iCnt)
+{
+	iCnt = 0;
+	for (int i = 0; i < iCol; ++i)
+	{
+
+
+		if (pArr[iCol * i + 0] == pArr[iCol * i + 1] && 
+			pArr[iCol * i + 0] == pArr[iCol * i + 2] && 
+			pArr[iCol * i + 0] == pArr[iCol * i + 3] &&
+			pArr[iCol * i + 0] == pArr[iCol * i + 4])
+		{
+			++iCnt;
+		}
+		if(pArr[iCol * 0 + i] == pArr[iCol * 1 + i] &&
+		   pArr[iCol * 0 + i] == pArr[iCol * 2 + i] &&
+		   pArr[iCol * 0 + i] == pArr[iCol * 3 + i] &&
+		   pArr[iCol * 0 + i] == pArr[iCol * 4 + i])
+		{
+			++iCnt;
+		}
+
+	}
+	if (pArr[iCol * 0 + 0] == pArr[iCol * 1 + 1] &&
+		pArr[iCol * 0 + 0] == pArr[iCol * 2 + 2] &&
+		pArr[iCol * 0 + 0] == pArr[iCol * 3 + 3] &&
+		pArr[iCol * 0 + 0] == pArr[iCol * 4 + 4])
+	{
+		++iCnt;
+	}
+
+	if (pArr[iCol * 0 + 4] == pArr[iCol * 1 + 3] &&
+		pArr[iCol * 0 + 4] == pArr[iCol * 2 + 2] &&
+		pArr[iCol * 0 + 4] == pArr[iCol * 3 + 1] &&
+		pArr[iCol * 0 + 4] == pArr[iCol * 4 + 0])
+	{
+		++iCnt;
+	}
+	//return pCnt;
 }

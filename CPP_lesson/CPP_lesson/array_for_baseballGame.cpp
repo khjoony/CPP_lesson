@@ -12,7 +12,7 @@ using namespace std;
 void CreateNum(int* pArr, int size);
 void Shuffle(int* pArr, int size);
 void PrintNum(int* pArr, int size);
-void UserInput(int* pArr, int size);
+int UserInput(int* pArr, int size, int& iEnd);
 void Compare(int* pArr1, int* PArr2,int* pStr, int size);
 int main()
 {
@@ -22,6 +22,7 @@ int main()
 	int* apArray = aiArray;
 	int* upArray = uiArray;
 	int* pStr = baseBall;
+	int iEnd;
 
 	CreateNum(apArray, NINE);
 	Shuffle(apArray, NINE);
@@ -30,15 +31,13 @@ int main()
 		//system("cls");
 		baseBall[0] = baseBall[1] = 0;
 		cout << "Input number 0 to 9, Please (0 : Exit) : ";
-		UserInput(upArray, THREE);
+		UserInput(upArray, THREE, iEnd);
 		PrintNum(apArray, THREE);
 		Compare(apArray, upArray, pStr, THREE);
-		if (uiArray[0] * uiArray[1] * uiArray[2] == 0)
-		{
-		cout << "Bye Bye~ ";
-		break;
+		if (iEnd == 0) {
+			break;
 		}
-		else if (uiArray[0] < 0 || uiArray[0] > 9 || uiArray[1] < 0 || uiArray[1] > 9 || uiArray[2] < 0 || uiArray[2] > 9)
+		if (uiArray[0] < 0 || uiArray[0] > 9 || uiArray[1] < 0 || uiArray[1] > 9 || uiArray[2] < 0 || uiArray[2] > 9)
 		{
 			cout << "Input wrong number! \n";
 			continue;
@@ -66,5 +65,6 @@ int main()
 		}
 		
 	}
+	cout << "\n Bye ~  Bye ~ ~ !!" << endl;
 	return 0;
 }
