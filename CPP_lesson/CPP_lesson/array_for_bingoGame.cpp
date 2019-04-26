@@ -31,7 +31,7 @@ int main()
 	while (true)
 	{		
 		cout << "Input number 1 to 25, Please [include 0 = Exit] : ";
-		UserInput(pInput, BINGO, iEnd);
+		UserInput(pInput, BINGO/BINGO, iEnd);
 		if (iEnd == 0)
 			break;
 		system("cls");

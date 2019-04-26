@@ -164,41 +164,47 @@ void MoveRight(int* pArr, int iCol, int sizeTot)
 
 void Count(int* pArr, int iCol, int sizeTot,int& iCnt)
 {
+	int iStarrX = 0, iStarlX = 0, iStarR = 0, iStarC = 0;
 	iCnt = 0;
 	for (int i = 0; i < iCol; ++i)
 	{
-
-
-		if (pArr[iCol * i + 0] == pArr[iCol * i + 1] && 
-			pArr[iCol * i + 0] == pArr[iCol * i + 2] && 
-			pArr[iCol * i + 0] == pArr[iCol * i + 3] &&
-			pArr[iCol * i + 0] == pArr[iCol * i + 4])
+		iStarR = iStarC = 0;
+		for (int j = 0; j < iCol; ++j)
 		{
-			++iCnt;
-		}
-		if(pArr[iCol * 0 + i] == pArr[iCol * 1 + i] &&
-		   pArr[iCol * 0 + i] == pArr[iCol * 2 + i] &&
-		   pArr[iCol * 0 + i] == pArr[iCol * 3 + i] &&
-		   pArr[iCol * 0 + i] == pArr[iCol * 4 + i])
-		{
-			++iCnt;
-		}
+			// Row Bingo
+			if (pArr[i * iCol + j] == INT_MAX)
+			{
+				++iStarR;
+			}
 
-	}
-	if (pArr[iCol * 0 + 0] == pArr[iCol * 1 + 1] &&
-		pArr[iCol * 0 + 0] == pArr[iCol * 2 + 2] &&
-		pArr[iCol * 0 + 0] == pArr[iCol * 3 + 3] &&
-		pArr[iCol * 0 + 0] == pArr[iCol * 4 + 4])
-	{
-		++iCnt;
+			// Column Bingo
+			if (pArr[j * iCol + i] == INT_MAX)
+			{
+				++iStarC;
+			}
+
+		}
+		if (iStarR == iCol)
+			++iCnt;
+		if (iStarC == iCol)
+			++iCnt;
 	}
 
-	if (pArr[iCol * 0 + 4] == pArr[iCol * 1 + 3] &&
-		pArr[iCol * 0 + 4] == pArr[iCol * 2 + 2] &&
-		pArr[iCol * 0 + 4] == pArr[iCol * 3 + 1] &&
-		pArr[iCol * 0 + 4] == pArr[iCol * 4 + 0])
+	// Right Down Bingo
+	for (int i = 0; i < sizeTot; i+= (iCol + 1))
 	{
-		++iCnt;
+		if (pArr[i] == INT_MAX)
+			++iStarrX;
 	}
-	//return pCnt;
+	if (iStarrX == iCol)
+		++iCnt;
+
+	// Left Down Bingo
+	for (int i = 4; i < sizeTot-1; i += (iCol - 1))
+	{
+		if (pArr[i] == INT_MAX)
+			++iStarlX;
+	}
+	if (iStarlX == iCol)
+		++iCnt;
 }
