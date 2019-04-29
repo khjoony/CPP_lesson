@@ -15,11 +15,11 @@ void CreateNum(int* pArr, int size)
 	}
 }
 
-void Shuffle(int* pArr, int size)
+void Shuffle(int* pArr, int iCol, int size)
 {
 	srand((unsigned int)time(0));
 	int iTemp, iIndex1, iIndex2;
-	for (int i = 0; i < size * 4; ++i)
+	for (int i = 0; i < size * iCol; ++i)
 	{
 		iIndex1 = rand() % size;
 		iIndex2 = rand() % size;
@@ -74,6 +74,23 @@ int UserInput(int* pArr, int size, int& iEnd)
 	cout << endl;
 }
 
+void AiInput(int* pArr1, int* pArr2, int iCol, int sizeTot)
+{
+	int iAiNoneSelectCnt = 0;
+	for (int i = 0; i < sizeTot; ++i)
+	{
+		if (pArr1[i] != INT_MAX)
+		{
+			pArr2[iAiNoneSelectCnt] = pArr1[i];
+			++iAiNoneSelectCnt;
+		}
+	}
+	cout << "iAiNoneSelectCnt = " << iAiNoneSelectCnt << endl;
+	srand((unsigned int)time(0));
+	int iIdx = rand() % (iAiNoneSelectCnt + 1);
+	cout << "iIdx = " << iIdx << endl;
+	pArr2[0] = pArr2[iIdx];
+}
 void Compare(int* pArr1, int* pArr2,int* pStr, int size)
 {
 	for (int i = 0; i < size; ++i)
