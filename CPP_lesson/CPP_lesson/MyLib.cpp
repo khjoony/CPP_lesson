@@ -1,11 +1,25 @@
 #include <iostream>
 #include <time.h>
 #include <iomanip>
-
 #include "MyLib.h"
 
+enum LINE_NUM
+{
+	LN_H1 = 0,
+	LN_H2,
+	LN_H3,
+	LN_H4,
+	LN_H5,
+	LN_V1,
+	LN_V2,
+	LN_V3,
+	LN_V4,
+	LN_V5,
+	LN_LT,
+	LN_RT
+};
 using namespace std;
-static int iStarIndex;
+static int iStarIndex, iAiNoneStarCnt;
 void CreateNum(int* pArr, int size)
 {
 
@@ -72,6 +86,21 @@ int UserInput(int* pArr, int size, int& iEnd)
 		cout << setw(5) << pArr[i];
 	}
 	cout << endl;
+	return 0;
+}
+
+void MaxStar(int* pArr, int sizeStar, int& max)
+{
+	cout << "sizeStar : " << sizeStar << endl;
+	int temp = 0;
+	for (int i = 0; i < sizeStar; ++i) {
+		if (pArr[i] < 5 && pArr[i] > temp)
+		{
+			temp = pArr[i];
+			max = i;
+		}
+		cout << endl;
+	}
 }
 
 void AiInput(int* pArr1, int* pArr2, int iCol, int sizeTot)
@@ -91,6 +120,123 @@ void AiInput(int* pArr1, int* pArr2, int iCol, int sizeTot)
 	cout << "iIdx = " << iIdx << endl;
 	pArr2[0] = pArr2[iIdx];
 }
+
+void AiInput(int* pArr1, int* pArr2, int iCol, int sizeTot, int max)
+{
+	switch (max)
+	{
+	case LN_H1:
+		for (int i = 0; i < iCol; ++i)
+		{
+			if (pArr1[i] != INT_MAX)
+			{
+				pArr2[0] = pArr1[i];
+			}
+		}
+		break;
+	case LN_H2:
+		for (int i = 0; i < iCol; ++i)
+		{
+			if (pArr1[i + iCol] != INT_MAX)
+			{
+				pArr2[0] = pArr1[i + iCol];
+			}
+		}
+		break;
+	case LN_H3:
+		for (int i = 0; i < iCol; ++i)
+		{
+			if (pArr1[i + iCol * 2] != INT_MAX)
+			{
+				pArr2[0] = pArr1[i + iCol *2];
+			}
+		}
+		break;
+	case LN_H4:
+		for (int i = 0; i < iCol; ++i)
+		{
+			if (pArr1[i + iCol * 3] != INT_MAX)
+			{
+				pArr2[0] = pArr1[i + iCol * 3];
+			}
+		}
+		break;
+	case LN_H5:
+		for (int i = 0; i < iCol; ++i)
+		{
+			if (pArr1[i + iCol * 4] != INT_MAX)
+			{
+				pArr2[0] = pArr1[i + iCol * 4];
+			}
+		}
+		break;
+	case LN_V1:
+		for (int i = 0; i < iCol; ++i)
+		{
+			if (pArr1[i * iCol ] != INT_MAX)
+			{
+				pArr2[0] = pArr1[i * iCol];
+			}
+		}
+		break;
+	case LN_V2:
+		for (int i = 0; i < iCol; ++i)
+		{
+			if (pArr1[i * iCol +1] != INT_MAX)
+			{
+				pArr2[0] = pArr1[i * iCol + 1];
+			}
+		}
+		break;
+	case LN_V3:
+		for (int i = 0; i < iCol; ++i)
+		{
+			if (pArr1[i * iCol +2] != INT_MAX)
+			{
+				pArr2[0] = pArr1[i * iCol + 2];
+			}
+		}
+		break;
+	case LN_V4:
+		for (int i = 0; i < iCol; ++i)
+		{
+			if (pArr1[i * iCol + 3] != INT_MAX)
+			{
+				pArr2[0] = pArr1[i * iCol + 3];
+			}
+		}
+		break;
+	case LN_V5:
+		for (int i = 0; i < iCol; ++i)
+		{
+			if (pArr1[i * iCol + 4] != INT_MAX)
+			{
+				pArr2[0] = pArr1[i * iCol + 4];
+			}
+		}
+		break;
+	case LN_LT:
+		for (int i = 0; i < sizeTot; i += (iCol + 1))
+		{
+			if (pArr1[i] != INT_MAX)
+			{
+				pArr2[0] = pArr1[i];
+			}
+		}
+		break;
+	case LN_RT:
+		for (int i = 4; i < sizeTot - (iCol -1); i += (iCol - 1))
+		{
+			if (pArr1[i] != INT_MAX)
+			{
+				pArr2[0] = pArr1[i];
+			}
+		}
+		break;
+	}
+
+}
+
 void Compare(int* pArr1, int* pArr2,int* pStr, int size)
 {
 	for (int i = 0; i < size; ++i)
@@ -179,7 +325,7 @@ void MoveRight(int* pArr, int iCol, int sizeTot)
 	}
 }
 
-void Count(int* pArr, int iCol, int sizeTot,int& iCnt)
+void Count(int* pArr1, int* pArr2, int iCol, int sizeTot, int& iCnt)
 {
 	int iStarrX = 0, iStarlX = 0, iStarR = 0, iStarC = 0;
 	iCnt = 0;
@@ -189,18 +335,19 @@ void Count(int* pArr, int iCol, int sizeTot,int& iCnt)
 		for (int j = 0; j < iCol; ++j)
 		{
 			// Row Bingo
-			if (pArr[i * iCol + j] == INT_MAX)
+			if (pArr1[i * iCol + j] == INT_MAX)
 			{
 				++iStarR;
 			}
-
 			// Column Bingo
-			if (pArr[j * iCol + i] == INT_MAX)
+			if (pArr1[j * iCol + i] == INT_MAX)
 			{
 				++iStarC;
 			}
 
 		}
+		pArr2[i] = iStarR;
+		pArr2[i + iCol] = iStarC;
 		if (iStarR == iCol)
 			++iCnt;
 		if (iStarC == iCol)
@@ -210,18 +357,20 @@ void Count(int* pArr, int iCol, int sizeTot,int& iCnt)
 	// Right Down Bingo
 	for (int i = 0; i < sizeTot; i+= (iCol + 1))
 	{
-		if (pArr[i] == INT_MAX)
+		if (pArr1[i] == INT_MAX)
 			++iStarrX;
 	}
+	pArr2[10] = iStarrX;
 	if (iStarrX == iCol)
 		++iCnt;
 
 	// Left Down Bingo
 	for (int i = 4; i < sizeTot-1; i += (iCol - 1))
 	{
-		if (pArr[i] == INT_MAX)
+		if (pArr1[i] == INT_MAX)
 			++iStarlX;
 	}
+	pArr2[11] = iStarlX;
 	if (iStarlX == iCol)
 		++iCnt;
 }
