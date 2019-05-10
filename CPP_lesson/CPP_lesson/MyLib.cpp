@@ -99,7 +99,6 @@ void MaxStar(int* pArr, int sizeStar, int& max)
 			temp = pArr[i];
 			max = i;
 		}
-		cout << endl;
 	}
 }
 
