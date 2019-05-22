@@ -72,6 +72,9 @@
     <ClCompile Include="struct_string_studentManagement.cpp">
       <Filter>소스 파일\struct</Filter>
     </ClCompile>
+    <ClCompile Include="struct_string_bookLibraryManagement.cpp">
+      <Filter>소스 파일\struct</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MyLib.h">
