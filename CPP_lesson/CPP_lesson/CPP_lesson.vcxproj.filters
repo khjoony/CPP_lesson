@@ -22,6 +22,9 @@
     <Filter Include="소스 파일\array">
       <UniqueIdentifier>{ff7a6429-b734-4f78-adcb-07d9f30d7c6c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\struct">
+      <UniqueIdentifier>{16ba9d29-aeba-4381-86e4-1cac49713ecc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dataType.cpp">
@@ -62,6 +65,15 @@
     </ClCompile>
     <ClCompile Include="array_for_bingoGame.cpp">
       <Filter>소스 파일\array</Filter>
+    </ClCompile>
+    <ClCompile Include="struct_string.cpp">
+      <Filter>소스 파일\struct</Filter>
+    </ClCompile>
+    <ClCompile Include="struct_string_studentManagement.cpp">
+      <Filter>소스 파일\struct</Filter>
+    </ClCompile>
+    <ClCompile Include="struct_string_bookLibraryManagement.cpp">
+      <Filter>소스 파일\struct</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
